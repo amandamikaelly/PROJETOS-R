@@ -1,0 +1,178 @@
+---
+title: "minha primeira analise de dados"
+author: "amanda mikaelly"
+date: "2024-05-27"
+output: html_document
+---
+
+# Ver as primeiras linhas dos dados
+
+```{r}
+library(dplyr)
+library(tidyverse)
+
+banco <- read_csv("banco.csv")
+head(banco)
+```
+
+
+# Calcular a média
+
+```{r}
+media_idade <- mean(banco$Idade, na.rm = TRUE)
+media_renda <- mean(banco$Renda, na.rm = TRUE)
+media_limite_cartao <- mean(banco$LimiteCartaodeCredito, na.rm = TRUE)
+media_limite_cheque <- mean(banco$LimiteChequeEspecial, na.rm = TRUE)
+media_saldo_devedor <- mean(banco$SaldoDevedor, na.rm = TRUE)
+```
+
+
+# Mostrar resultados
+
+```{r}
+media_idade
+media_renda
+media_limite_cartao
+media_limite_cheque
+media_saldo_devedor
+```
+
+# Definir uma função para calcular a moda
+
+```{r}
+moda <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+```
+
+# Calcular a moda
+```{r}
+moda_idade <- moda(banco$Idade)
+moda_renda <- moda(banco$Renda)
+moda_limite_cartao <- moda(banco$LimiteCartaodeCredito)
+moda_limite_cheque <- moda(banco$LimiteChequeEspecial)
+moda_saldo_devedor <- moda(banco$SaldoDevedor)
+
+```
+
+# Mostrar resultados
+```{r}
+moda_idade
+moda_renda
+moda_limite_cartao
+moda_limite_cheque
+moda_saldo_devedor
+```
+
+
+# Calcular a variância
+```{r}
+variancia_idade <- var(banco$Idade, na.rm = TRUE)
+variancia_renda <- var(banco$Renda, na.rm = TRUE)
+variancia_limite_cartao <- var(banco$LimiteCartaodeCredito, na.rm = TRUE)
+variancia_limite_cheque <- var(banco$LimiteChequeEspecial, na.rm = TRUE)
+variancia_saldo_devedor <- var(banco$SaldoDevedor, na.rm = TRUE)
+```
+
+# Mostrar resultados
+```{r}
+variancia_idade
+variancia_renda
+variancia_limite_cartao
+variancia_limite_cheque
+variancia_saldo_devedor
+```
+
+
+# Frequências para a variável Sexo
+```{r}
+frequencia_sexo <- table(banco$Sexo)
+print(frequencia_sexo)
+```
+
+# Frequências para a variável CartaoDeCredito
+```{r}
+frequencia_cartao <- table(banco$CartaodeCredito)
+print(frequencia_cartao)
+```
+
+# Frequências para a variável ChequeEspecial
+```{r}
+frequencia_cheque <- table(banco$ChequeEspecial)
+print(frequencia_cheque)
+```
+
+# Frequências para a variável Devedor
+```{r}
+frequencia_devedor <- table(banco$Devedor)
+print(frequencia_devedor)
+```
+
+# Carregar a biblioteca ggplot2
+
+```{r}
+library(ggplot2)
+```
+
+# Criar o gráfico de barras
+```{r}
+grafico_sexo <- ggplot(data = banco, aes(x = Sexo)) +
+  geom_bar(fill = "skyblue", color = "black") +
+  labs(title = "Distribuição de Clientes por Sexo",
+       x = "Sexo",
+       y = "Número de Clientes")
+
+```
+
+# Mostrar o gráfico
+```{r}
+print(grafico_sexo)
+```
+
+# Criar o histograma da idade dos clientes
+```{r}
+grafico_idade <- ggplot(data = banco, aes(x = Idade)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
+  labs(title = "Distribuição da Idade dos Clientes",
+       x = "Idade",
+       y = "Frequência")
+```
+
+
+# Mostrar o gráfico
+```{r}
+print(grafico_idade)
+```
+
+# Criar o boxplot da renda dos clientes
+```{r}
+grafico_renda <- ggplot(data = banco, aes(y = Renda)) +
+  geom_boxplot(fill = "skyblue", color = "black") +
+  labs(title = "Boxplot da Renda dos Clientes",
+       y = "Renda")
+```
+
+
+# Mostrar o gráfico
+```{r}
+print(grafico_renda)
+```
+
+# Criar o gráfico de barras para a variável Devedor
+
+```{r}
+grafico_devedor <- ggplot(data = banco, aes(x = Devedor)) +
+  geom_bar(fill = "skyblue", color = "black") +
+  labs(title = "Clientes Devedores vs. Não Devedores",
+       x = "Devedor",
+       y = "Quantidade de Clientes")
+```
+
+
+# Mostrar o gráfic
+```{r}
+print(grafico_devedor)
+```a
+
